@@ -542,7 +542,7 @@ int main(void)
         {
           draw_circle(val)
         }
-        else if (strcmp(buffer, "wasd") > 0) // wasdmode.
+        else if (strcmp(buffer, "wasd") == 0) // wasdmode.
         {
           while (ch != 'x')
           {
