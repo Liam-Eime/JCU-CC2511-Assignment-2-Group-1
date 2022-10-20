@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <math.h>
 #include "hardware/pwm.h"
 #include "hardware/uart.h"
@@ -541,7 +542,7 @@ int main(void)
         {
           draw_circle(val)
         }
-        else if (sscanf(buffer, "wasd") > 0) // wasdmode.
+        else if (strcmp(buffer, "wasd") > 0) // wasdmode.
         {
           while (ch != 'x')
           {
