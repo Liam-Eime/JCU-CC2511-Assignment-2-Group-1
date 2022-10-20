@@ -549,27 +549,27 @@ int main(void)
             int ch = getchar_timeout_us(0);
             if (ch == 'q')
             {
-              z_move = 1;
+              z_move = 100;
             }
             else if (ch == 'w')
             {
-              y_move = 1;
+              y_move = 100;
             }
             else if (ch == 'e')
             {
-              z_move = -1;
+              z_move = -100;
             }
             else if (ch == 'a')
             {
-              x_move = -1;
+              x_move = -100;
             }
             else if (ch == 's')
             {
-              y_move = -1;
+              y_move = -100;
             }
             else if (ch == 'd')
             {
-              x_move = 1;
+              x_move = 100;
             }
             else if (ch == ' ')
             {
@@ -585,7 +585,6 @@ int main(void)
               }
               sleep_ms(200);
             }
-            sleep_us(sleep_time);
             moving_steps()
           }
         }
