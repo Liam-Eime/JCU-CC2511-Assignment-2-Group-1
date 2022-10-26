@@ -186,6 +186,27 @@ void draw_circle(int size, int x_place, int y_place, int z_place, int x_max, int
   }
 }
 
+// Prints different values depending on input (0-3)
+void print_debug_target(int target)
+{
+  if (target == 0)
+  {
+    printf("Motor: x      \n\r");
+  }
+  else if (target == 1)
+  {
+    printf("Motor: y      \n\r");
+  }
+  else if (target == 2)
+  {
+    printf("Motor: z      \n\r");
+  }
+  else if (target == 3)
+  {
+    printf("Motor: Spindle\n\r");
+  }
+}
+
 int main(void)
 {
   // Initialise components and variables
@@ -295,6 +316,9 @@ int main(void)
 
   while (true)
   {
+    term_cls();
+    term_move_to(1, 1);
+    printf("Button 1:    Debug Mode\n\rButton 2:    Terminal\n\rButton 3:    Currently not in use\n\rButton 4:    Currently not in use\n\r");
     while ((codeType < 1) || (codeType > 4)) // selects the codetype using the onboard buttons.
     {
       if (!gpio_get(SW1) + !gpio_get(SW2) + !gpio_get(SW3) + !gpio_get(SW4) > 1)
@@ -304,18 +328,28 @@ int main(void)
       else if (!gpio_get(SW1))
       {
         codeType = 1;
+        term_cls();
+        term_move_to(1, 1);
+        printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
+        print_debug_target(debug_target);
       }
       else if (!gpio_get(SW2))
       {
         codeType = 2;
+        term_cls();
+        term_move_to(1, 1);
       }
       else if (!gpio_get(SW3))
       {
         codeType = 3;
+        term_cls();
+        term_move_to(1, 1);
       }
       else if (!gpio_get(SW4))
       {
         codeType = 4;
+        term_cls();
+        term_move_to(1, 1);
       }
     }
     blink(codeType);
@@ -327,11 +361,16 @@ int main(void)
         {
           debug_target++;
           debug_target = ((debug_target) > (3) ? (0) : debug_target); // debug_target = (if (debug_target > 3) {0} else {debug_target})
+          term_move_to(1, 6);
+          print_debug_target(debug_target);
           blink(debug_target + 1);
         }
         if (!gpio_get(SW1)) // fall out of debug into options
         {
           debug = 0;
+          term_cls();
+          term_move_to(1, 1);
+          printf("Button 1:    Exit Options\n\rButton 2:    Set Home\n\rButton 3:    Set Max Limit\n\rButton 4:    Exit Mode 1\n\r");
           blink(1);
         }
         // All the below test if SW3 or SW4 have been clicked in them, choose to make debug_target be main factor because of "3" the spinndle
@@ -362,6 +401,9 @@ int main(void)
       if (!gpio_get(SW1))
       {
         debug = 1;
+        term_cls();
+        term_move_to(1, 1);
+        printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
         blink(1);
       }
       else if (!gpio_get(SW2))
@@ -370,17 +412,29 @@ int main(void)
         y_place = 0;
         z_place = 0;
         debug = 1;
+        term_cls();
+        term_move_to(1, 1);
+        printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
         blink(2);
       }
       else if (!gpio_get(SW3))
       { // set lims
+        x_max = x_place;
+        y_max = y_place;
+        z_max = z_place;
         debug = 1;
+        term_cls();
+        term_move_to(1, 1);
+        printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
         blink(3);
       }
       else if (!gpio_get(SW4))
       {
         codeType = 0;
         term_cls();
+        term_move_to(1, 1);
+        printf("Button 1:    Debug Mode\n\rButton 2:    Terminal\n\rButton 3:    Currently not in use\n\rButton 4:    Currently not in use\n\r");
+
         blink(4);
       }
     }
