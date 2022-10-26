@@ -316,6 +316,7 @@ int main(void)
 
   while (true)
   {
+    term_set_color(clrYellow, clrBlack);
     term_cls();
     term_move_to(1, 1);
     printf("Button 1:    Debug Mode\n\rButton 2:    Terminal\n\rButton 3:    Currently not in use\n\rButton 4:    Currently not in use\n\r");
@@ -328,6 +329,7 @@ int main(void)
       else if (!gpio_get(SW1))
       {
         codeType = 1;
+        term_set_color(clrYellow, clrBlack);
         term_cls();
         term_move_to(1, 1);
         printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
@@ -404,6 +406,7 @@ int main(void)
         term_cls();
         term_move_to(1, 1);
         printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
+        print_debug_target(debug_target);
         blink(1);
       }
       else if (!gpio_get(SW2))
@@ -415,6 +418,7 @@ int main(void)
         term_cls();
         term_move_to(1, 1);
         printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
+        print_debug_target(debug_target);
         blink(2);
       }
       else if (!gpio_get(SW3))
@@ -426,6 +430,7 @@ int main(void)
         term_cls();
         term_move_to(1, 1);
         printf("Button 1:    Options\n\rButton 2:    Change Motor\n\rButton 3:    Move Negative\n\rButton 4:    Move Positive\n\n\r");
+        print_debug_target(debug_target);
         blink(3);
       }
       else if (!gpio_get(SW4))
@@ -434,7 +439,6 @@ int main(void)
         term_cls();
         term_move_to(1, 1);
         printf("Button 1:    Debug Mode\n\rButton 2:    Terminal\n\rButton 3:    Currently not in use\n\rButton 4:    Currently not in use\n\r");
-
         blink(4);
       }
     }
