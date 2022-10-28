@@ -4,6 +4,12 @@
  * ATest
  * ***********************************************************/
 
+
+// Please note that anything named with "debug", does not refer to anything with a secind PICO board for debugging.
+// Debug throughout the program refers to the ability to "debug" the system with manual control of just the onboard information,
+// including blinking the onboard LED a number of times to display limited information as to what state the board is in.
+
+
 #include "pico/stdlib.h"
 #include <stdbool.h>
 #include <stdlib.h>
@@ -49,7 +55,8 @@ unsigned int indexx = 0;
 #define SW4 16
 
 #define GREEN_LED PICO_DEFAULT_LED_PIN
-// When using this one need to set both dir and step to false after a sleep command, returns 1 or -1 depending on direction.
+// Function to step a motor once in a direction based on if move is a positive or negative command. (Eg move 1 steps one way, and move -1 steps another way)
+// When using this one need, to set both dir and step to false after a sleep command, returns 1 or -1 depending on direction.
 int one_step_in_dir(int *move, int step, int dir, int max, int *place, bool debug)
 {
   if ((*move > 0) && ((*place < max) || (debug)))
@@ -71,6 +78,7 @@ int one_step_in_dir(int *move, int step, int dir, int max, int *place, bool debu
   }
 }
 
+// Similar to the previous function, the debug_step function here is for when in use with onboard buttons.
 // When using this one no need to set any sleep command, returns 1 or -1 depending on direction.
 int debug_step(int step, int dir)
 {
@@ -115,7 +123,8 @@ void blink(int amount)
   sleep_ms(300);
 }
 
-// Main step code, moves until x_move, y_move and z_move all equil zero, and in straight line.
+// Main step code, moves until x_move, y_move and z_move all equal zero, and in straight line.
+// Straight line is ensured by scaling of time it should take each axis to move to be the same.
 void moving_steps(int *x_move, int *y_move, int *z_move, int *x_place, int *y_place, int *z_place, int x_max, int y_max, int z_max, bool debug)
 {
   int x_time = 0;
@@ -162,6 +171,7 @@ void moving_steps(int *x_move, int *y_move, int *z_move, int *x_place, int *y_pl
   }
 }
 
+// Function to draw circle.
 // Size is radius of circle and is drawn from the left side
 void draw_circle(uint64_t size, int x_place, int y_place, int z_place, int x_max, int y_max, int z_max)
 {
@@ -364,7 +374,9 @@ int main(void)
           printf("Button 1:    Exit Options\n\rButton 2:    Set Home\n\rButton 3:    Set Max Limit\n\rButton 4:    Exit Mode 1\n\r");
           blink(1);
         }
-        // All the below test if SW3 or SW4 have been clicked in them, choose to make debug_target be main factor because of "3" the spinndle
+        // All the below (bar when debug_targget == 3):
+        // Use debug_step function and see if SW3 or SW4 have been clicked.
+        // Tell x y or z to go to place value accordingly depending on the direction, as indicated by SW3 or SW4.
         if (debug_target == 0) // xstepper mottor.
         {
           x_place = x_place + debug_step(Xstep, Xdir);
