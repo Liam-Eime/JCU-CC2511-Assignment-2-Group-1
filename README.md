@@ -3,6 +3,7 @@ Repo for CC2511 embedded systems design, assignment 2 for group 1
 
 Group members: Liam Eime, Darcy Kemp, Justin Fagg, Tahlia Clennar.
 
+The CC2511 assignment 2 of 2022 is to design hardware and software based on specifications outlined in a task sheet, to drive and control a CNC machine with 3 stepper motors (for x, y, and z directions), and a spindle with a drill head.
 The reposiotry will contain:
   - any programs written for this assingment
   - Altium designer work
