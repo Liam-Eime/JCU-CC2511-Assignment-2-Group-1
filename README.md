@@ -8,7 +8,7 @@ The reposiotry will contain:
   - any programs written for this assingment
   - Altium designer work
 
-For anyone (probably CC2511 students from 2023 onwards) who wishes to use the material provided in thsi repository please make note of the followng:
+For anyone (probably CC2511 students from 2023 onwards) who wishes to use the material provided in this repository please make note of the followng:
   - In the hardware, a design choice was to break out the voltage divider in the DRV8825 stepper motor controllers to a single pair of headers.
     This allows for resistor values to manually be placed in the headers.
   - Also, please make note of the first comments in main.c abou the term "debug", this project was designed around not using a second PICO board to run the program
