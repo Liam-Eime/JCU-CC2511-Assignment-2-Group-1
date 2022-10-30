@@ -5,7 +5,7 @@
  * ***********************************************************/
 
 
-// Please note that anything named with "debug", does not refer to anything with a secind PICO board for debugging.
+// Please note that anything named with "debug", does not refer to anything with a second PICO board for debugging.
 // Debug throughout the program refers to the ability to "debug" the system with manual control of just the onboard information,
 // including blinking the onboard LED a number of times to display limited information as to what state the board is in.
 
